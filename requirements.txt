@@ -24,4 +24,3 @@ blenderproc
 dreifus
 torch-fidelity
 clean-fid
-git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch

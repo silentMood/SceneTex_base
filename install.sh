@@ -22,17 +22,6 @@ setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
 conda create -n scenetex --force python=3.9
 conda activate scenetex
 ############################ dependencies install ############################
-# install PyTorch 2.0.1
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia -y
-
-# install runtime dependencies for PyTorch3D
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y
-conda install -c bottler nvidiacub -y
-
-# install PyTorch3D
-conda install pytorch3d -c pytorch3d -y
-
-conda install xformers -c xformers -y
 
 setenv CUDAToolkit_ROOT /nfs/encs/ArchDep/x86_64.EL7/pkg/cuda-11.8/root/bin
 git clone --recursive https://github.com/NVlabs/tiny-cuda-nn.git
@@ -41,19 +30,3 @@ cmake . -B build
 cmake --build build --config RelWithDebInfo -j
 cd bindings/torch
 python setup.py install
-cd ../../..
-
-pip install -r requirements.txt --no-input
-############################ dependencies install end ############################
-
-
-############################ Job run ############################
-stamp=$(date "+%Y-%m-%d_%H-%M-%S")
-log_dir="outputs/" # your output dir
-prompt="a bohemian style living room" # your prompt
-scene_id="93f59740-4b65-4e8b-8a0f-6420b339469d/room_4" # preprocessed scene
-
-date
-srun python scripts/train_texture.py --config config/template.yaml --stamp $stamp --log_dir $log_dir --prompt "$prompt" --scene_id "$scene_id"
-date
-############################ Job run end ############################
