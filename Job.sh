@@ -38,8 +38,6 @@ conda install pytorch3d -c pytorch3d -y
 
 conda install xformers -c xformers -y
 
-pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch --no-input
-
 pip install -r requirements.txt --no-input
 ############################ dependencies install end ############################
 
