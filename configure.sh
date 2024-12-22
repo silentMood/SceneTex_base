@@ -11,3 +11,6 @@ conda activate scenetex
 # create and activate the conda environment
 conda create -n scenetex python=3.9
 conda activate scenetex
+
+mkdir /speed-scratch/$USER/tmp/py
+setenv TMPDIR /speed-scratch/$USER/tmp/py

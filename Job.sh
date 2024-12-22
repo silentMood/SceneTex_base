@@ -1,18 +1,29 @@
-#!/encs/bin/bash
+#!/encs/bin/tcsh
 
 #SBATCH --job-name=scene_tex    ## Give the job a name 
 #SBATCH --mail-type=ALL        ## Receive all email type notifications 
 #SBATCH --chdir=./             ## Use currect directory as working directory 
 #SBATCH --nodes=1              ## Number of nodes to run on 
-#SBATCH --ntasks=1   ## Number of cores 
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8      ## Number of MPI threads 
 #SBATCH --mem=160G             ## Assign 160G memory per node
 #SBATCH --gpus=1
 #SBATCH -p pt
 
-mkdir /speed-scratch/$USER/tmp/py
-setenv TMPDIR /speed-scratch/$USER/tmp/py
+############################ module install ############################
+module load anaconda3/default
+module load python/3.9.1/default
+module load cuda/11.8/default
 
+mkdir -p /speed-scratch/$USER/sceneTex/tmp
+mkdir -p /speed-scratch/$USER/sceneTex/pkgs
+setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp 
+setenv TMP /speed-scratch/$USER/sceneTex/tmp 
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
+############################ module install end ############################
+conda init tcsh
+source ~/.tcshrc
+conda activate scenetex
 ############################ dependencies install ############################
 # install PyTorch 2.0.1
 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia -y
