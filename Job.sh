@@ -8,7 +8,6 @@
 #SBATCH --cpus-per-task=8      ## Number of MPI threads 
 #SBATCH --mem=160G             ## Assign 160G memory per node
 #SBATCH --gpus=1
-#SBATCH -p pt
 
 ############################ module install ############################
 module load anaconda3/default
@@ -17,13 +16,10 @@ module load cuda/11.8/default
 
 mkdir -p /speed-scratch/$USER/sceneTex/tmp
 mkdir -p /speed-scratch/$USER/sceneTex/pkgs
-setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp 
-setenv TMP /speed-scratch/$USER/sceneTex/tmp 
+setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
 ############################ module install end ############################
-conda init tcsh
-source ~/.tcshrc
-conda create -n scenetex python=3.9
+conda create -n scenetex --force python=3.9
 conda activate scenetex
 ############################ dependencies install ############################
 # install PyTorch 2.0.1
@@ -49,6 +45,6 @@ prompt="a bohemian style living room" # your prompt
 scene_id="93f59740-4b65-4e8b-8a0f-6420b339469d/room_4" # preprocessed scene
 
 date
-python scripts/train_texture.py --config config/template.yaml --stamp $stamp --log_dir $log_dir --prompt "$prompt" --scene_id "$scene_id"
+srun python scripts/train_texture.py --config config/template.yaml --stamp $stamp --log_dir $log_dir --prompt "$prompt" --scene_id "$scene_id"
 date
 ############################ Job run end ############################
