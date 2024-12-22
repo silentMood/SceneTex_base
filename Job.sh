@@ -16,8 +16,10 @@ module load python/3.9.1/default
 module load cuda/11.8/default
 
 mkdir -p /speed-scratch/$USER/sceneTex/tmp
+mkdir -p /speed-scratch/$USER/sceneTex/tmpp
 mkdir -p /speed-scratch/$USER/sceneTex/pkgs
 setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
+setenv TMP /speed-scratch/$USER/sceneTex/tmpp
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
 
 ############################ module install end ############################
@@ -36,7 +38,7 @@ conda install pytorch3d -c pytorch3d -y
 
 conda install xformers -c xformers -y
 
-setenv CMAKE_CUDA_COMPILER /encs/pkg/cuda-11.5/root/bin/nvcc
+setenv CMAKE_CUDA_COMPILER /encs/pkg/cuda-11.8/root/bin/nvcc
 git clone --recursive https://github.com/NVlabs/tiny-cuda-nn.git
 cd tiny-cuda-nn
 cmake -DCMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc -DCMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/g++ . -B build
