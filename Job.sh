@@ -19,7 +19,7 @@ conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y
 conda install -c bottler nvidiacub -y
 
 # install PyTorch3D
-conda install pytorch3d pytorch-lightning -c pytorch3d -c conda-forge -y
+conda install pytorch3d pytorch_lightning -c pytorch3d -c conda-forge -y
 
 conda install xformers -c xformers -y
 
