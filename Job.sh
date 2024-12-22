@@ -10,6 +10,9 @@
 #SBATCH --gpus=1
 #SBATCH -p pt
 
+mkdir /speed-scratch/$USER/tmp/py
+setenv TMPDIR /speed-scratch/$USER/tmp/py
+
 ############################ dependencies install ############################
 # install PyTorch 2.0.1
 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia -y
