@@ -36,6 +36,6 @@ prompt="a bohemian style living room" # your prompt
 scene_id="93f59740-4b65-4e8b-8a0f-6420b339469d/room_4" # preprocessed scene
 
 date
-srun python python scripts/train_texture.py --config config/template.yaml --stamp $stamp --log_dir $log_dir --prompt "$prompt" --scene_id "$scene_id"
+python scripts/train_texture.py --config config/template.yaml --stamp $stamp --log_dir $log_dir --prompt "$prompt" --scene_id "$scene_id"
 date
 ############################ Job run end ############################
