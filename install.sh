@@ -19,14 +19,22 @@ mkdir -p /speed-scratch/$USER/sceneTex/tmp
 mkdir -p /speed-scratch/$USER/sceneTex/pkgs
 setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
+setenv CMAKE_CUDA_COMPILER /encs/pkg/cuda-11.5/root/bin/nvcc
+setenv CMAKE_C_COMP
 
 git clone --recursive https://github.com/NVlabs/tiny-cuda-nn.git
 cd tiny-cuda-nn
-cmake . -B CMAKE_CUDA_COMPILER=/nfs/encs/ArchDep/x86_64.EL7/pkg/cuda-11.8/root/bin/nvcc build
+cmake -DCMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc -DCMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/g++ . -B build
 cmake --build build --config RelWithDebInfo -j
 cd bindings/torch
 python setup.py install
 
 date
-cd /nfs/encs/ArchDep/x86_64.EL7/pkg/cuda-11.8/root/bin
+cd /encs/pkg/cuda-11.5/root/
 date
+
+setenv CMAKE_CXX_COMPILER /encs/pkg/gcc-9.3.0/root/bin/gcc
+
+cmake -DCMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc -DCMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/g++ . -B build
+
+cmake . -B CMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc CMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc build

@@ -10,6 +10,7 @@
 #SBATCH --gpus=1
 
 ############################ module install ############################
+module load gcc/9.3
 module load anaconda3/default
 module load python/3.9.1/default
 module load cuda/11.8/default
@@ -18,6 +19,7 @@ mkdir -p /speed-scratch/$USER/sceneTex/tmp
 mkdir -p /speed-scratch/$USER/sceneTex/pkgs
 setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
+
 ############################ module install end ############################
 conda create -n scenetex --force python=3.9
 conda activate scenetex
@@ -34,10 +36,10 @@ conda install pytorch3d -c pytorch3d -y
 
 conda install xformers -c xformers -y
 
-setenv CUDAToolkit_ROOT /nfs/encs/ArchDep/x86_64.EL7/pkg/cuda-11.8/root/bin
+setenv CMAKE_CUDA_COMPILER /encs/pkg/cuda-11.5/root/bin/nvcc
 git clone --recursive https://github.com/NVlabs/tiny-cuda-nn.git
 cd tiny-cuda-nn
-cmake . -B build
+cmake -DCMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc -DCMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/g++ . -B build
 cmake --build build --config RelWithDebInfo -j
 cd bindings/torch
 python setup.py install
@@ -45,7 +47,6 @@ cd ../../..
 
 pip install -r requirements.txt --no-input
 ############################ dependencies install end ############################
-
 
 ############################ Job run ############################
 stamp=$(date "+%Y-%m-%d_%H-%M-%S")
