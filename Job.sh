@@ -23,6 +23,7 @@ setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
 ############################ module install end ############################
 conda init tcsh
 source ~/.tcshrc
+conda create -n scenetex python=3.9
 conda activate scenetex
 ############################ dependencies install ############################
 # install PyTorch 2.0.1
