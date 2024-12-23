@@ -15,6 +15,9 @@ module load anaconda3/default
 module load python/3.9.1/default
 module load cuda/11.8/default
 
+setenv CUDA_HOME /encs/pkg/cuda-11.8/root
+setenv PATH ${CUDA_HOME}/bin:${PATH}
+
 mkdir -p /speed-scratch/$USER/sceneTex/tmp
 mkdir -p /speed-scratch/$USER/sceneTex/tmpp
 setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
@@ -24,7 +27,6 @@ mkdir -p /speed-scratch/$USER/conda/env
 mkdir -p /speed-scratch/$USER/conda/pkgs
 setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda/env
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkgs
-
 ############################ module install end ############################
 conda create -n scenetex --force python=3.9
 conda activate scenetex
