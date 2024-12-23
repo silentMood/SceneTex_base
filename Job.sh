@@ -41,14 +41,7 @@ conda install pytorch3d -c pytorch3d -y
 
 conda install xformers -c xformers -y
 
-setenv CMAKE_CUDA_COMPILER /encs/pkg/cuda-11.8/root/bin/nvcc
-git clone --recursive https://github.com/NVlabs/tiny-cuda-nn.git
-cd tiny-cuda-nn
-cmake -DCMAKE_C_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/gcc -DCMAKE_CXX_COMPILER=/encs/pkg/gcc-9.3.0/root/bin/g++ -DCUDAToolkit_ROOT=/encs/pkg/cuda-11.8/root . -B build
-cmake --build build --config RelWithDebInfo -j
-cd bindings/torch
-python setup.py install
-cd ../../..
+pip install "git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch"
 
 pip install -r requirements.txt --no-input
 ############################ dependencies install end ############################
