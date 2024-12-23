@@ -15,6 +15,7 @@ module load anaconda3/default
 module load python/3.9.1/default
 module load cuda/11.8/default
 
+setenv MAX_JOBS 8
 setenv CUDA_HOME /encs/pkg/cuda-11.8/root
 setenv PATH ${CUDA_HOME}/bin:${PATH}
 
@@ -46,6 +47,7 @@ conda install xformers -c xformers -y
 pip install "git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch"
 
 pip install -r requirements.txt --no-input
+
 
 pip install flash-attn --no-build-isolation
 ############################ dependencies install end ############################
