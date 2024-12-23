@@ -46,6 +46,8 @@ conda install xformers -c xformers -y
 pip install "git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch"
 
 pip install -r requirements.txt --no-input
+
+pip install flash-attn --no-build-isolation
 ############################ dependencies install end ############################
 
 ############################ Job run ############################
