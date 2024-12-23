@@ -29,11 +29,11 @@ mkdir -p /speed-scratch/$USER/conda/pkgs
 setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda/env
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkgs
 ############################ module install end ############################
-conda create -n scenetex --force python=3.9
-conda activate scenetex
+conda create -n scenetex_1 --force python=3.9 numpy=1.26.5
+conda activate scenetex_1
 ############################ dependencies install ############################
 # install PyTorch 2.0.1
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia -y
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia -y
 
 # install runtime dependencies for PyTorch3D
 conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y
@@ -47,7 +47,6 @@ conda install xformers -c xformers -y
 pip install "git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch"
 
 pip install -r requirements.txt --no-input
-
 
 pip install flash-attn --no-build-isolation
 ############################ dependencies install end ############################
