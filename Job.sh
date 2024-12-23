@@ -17,10 +17,13 @@ module load cuda/11.8/default
 
 mkdir -p /speed-scratch/$USER/sceneTex/tmp
 mkdir -p /speed-scratch/$USER/sceneTex/tmpp
-mkdir -p /speed-scratch/$USER/sceneTex/pkgs
 setenv TMPDIR /speed-scratch/$USER/sceneTex/tmp
 setenv TMP /speed-scratch/$USER/sceneTex/tmpp
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/sceneTex/pkgs
+
+mkdir -p /speed-scratch/$USER/conda/env
+mkdir -p /speed-scratch/$USER/conda/pkgs
+setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda/env
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkgs
 
 ############################ module install end ############################
 conda create -n scenetex --force python=3.9
